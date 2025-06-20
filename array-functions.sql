@@ -1,0 +1,26 @@
+| **Function**            | **Description**                                                                     | **Syntax**                                   | **Example**                                                         | **Output**                |
+| ----------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------- | ------------------------- | --- |
+| **`array_length()`**    | Returns the length of an array (number of elements).                                | `array_length(array, dimension)`             | `SELECT array_length(ARRAY[1, 2, 3], 1);`                           | `3`                       |
+| **`array_append()`**    | Appends an element to the end of an array.                                          | `array_append(array, element)`               | `SELECT array_append(ARRAY[1, 2, 3], 4);`                           | `{1, 2, 3, 4}`            |
+| **`array_prepend()`**   | Prepends an element to the beginning of an array.                                   | `array_prepend(element, array)`              | `SELECT array_prepend(0, ARRAY[1, 2, 3]);`                          | `{0, 1, 2, 3}`            |
+| **`array_cat()`**       | Concatenates two arrays.                                                            | `array_cat(array1, array2)`                  | `SELECT array_cat(ARRAY[1, 2], ARRAY[3, 4]);`                       | `{1, 2, 3, 4}`            |
+| **`array_remove()`**    | Removes all occurrences of a specified element from an array.                       | `array_remove(array, element)`               | `SELECT array_remove(ARRAY[1, 2, 3, 2], 2);`                        | `{1, 3}`                  |
+| **`array_replace()`**   | Replaces all occurrences of a specified element with another element in an array.   | `array_replace(array, old_value, new_value)` | `SELECT array_replace(ARRAY[1, 2, 3, 2], 2, 5);`                    | `{1, 5, 3, 5}`            |
+| **`array_to_string()`** | Converts an array to a string with a specified delimiter.                           | `array_to_string(array, delimiter)`          | `SELECT array_to_string(ARRAY['apple', 'banana', 'cherry'], ', ');` | `'apple, banana, cherry'` |
+| **`string_to_array()`** | Converts a string to an array, split by a specified delimiter.                      | `string_to_array(string, delimiter)`         | `SELECT string_to_array('apple,banana,cherry', ',');`               | `{apple, banana, cherry}` |     |
+| **`array_upper()`**     | Returns index of the last element of a specified dimension, not the element itself  | `array_upper(array, dimension)`              | `SELECT array_upper(ARRAY[1, 2, 3], 1);`                            | `3`                       |
+| **`array_lower()`**     | Returns index of the first element of a specified dimension, not the element itself | `array_lower(array, dimension)`              | `SELECT array_lower(ARRAY[1, 2, 3], 1);`                            | `1`                       |
+| **`array_ndims()`**     | Returns the number of dimensions in an array.                                       | `array_ndims(array)`                         | `SELECT array_ndims(ARRAY[[1, 2], [3, 4]]);`                        | `2`                       |
+| **`array_fill()`**      | Fills an array with a specified value and size.                                     | `array_fill(value, dims)`                    | `SELECT array_fill(0, ARRAY[3, 2]);`                                | `{0, 0, 0, 0, 0, 0}`      |
+| **`array_slice()`**     | Returns a subarray of a given array.                                                | `array_slice(array, start, stop)`            | `SELECT array_slice(ARRAY[1, 2, 3, 4, 5], 2, 4);`                   | `{2, 3, 4}`               |
+| **`unnest()`**          | Expands an array into a set of rows.                                                | `unnest(array)`                              | `SELECT unnest(ARRAY[1, 2, 3]);`                                    | `1`<br>`2`<br>`3`         |
+| **`array_dims()`**      | Returns the dimensions of an array.                                                 | `array_dims(array)`                          | `SELECT array_dims(ARRAY[[1, 2], [3, 4]]);`                         | `[{1,2},{1,2}]`           |
+| **`array_position()`**  | Returns the index of the first occurrence of an element in an array.                | `array_position(array, element)`             | `SELECT array_position(ARRAY[1, 2, 3], 2);`                         | `2`                       |
+| **`array_positions()`** | Returns all indexes of an element in an array.                                      | `array_positions(array, element)`            | `SELECT array_positions(ARRAY[1, 2, 3, 2], 2);`                     | `{2, 4}`                  |
+
+SELECT array_lower(ARRAY[10, 20, 30, 40], 1)
+SELECT array_ndims(ARRAY[[1,2,3], [2,3]]) -> This is not valid -> ERROR: multidimensional arrays must have array expressions with matching dimensions
+SELECT array_ndims(ARRAY[1,2,3, [2,3]]) -> This is not valid
+SELECT array_ndims(Array[[1,2], [3, 4]])
+
+SELECT unnest(ARRAY[1,2,3])
