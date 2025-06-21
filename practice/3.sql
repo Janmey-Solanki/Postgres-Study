@@ -56,10 +56,11 @@ WHERE quantity >= 2 AND returndate IS NULL;
 
 
 
-
+-- Below query returns purchase orders which were placed in last 6 days from NOW.
+-- You can change the unit in interval to days, months, hours, etc...
 SELECT *
 FROM Orders
-WHERE PurchaseDate >= NOW() - INTERVAL '6'
+WHERE PurchaseDate >= NOW() - INTERVAL '6 days'
   AND CustomerName NOT IN (
       SELECT CustomerName
       FROM Orders
